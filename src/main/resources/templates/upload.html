@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" th:with="page='Branch-List'" layout:decorate="~{layouts/main}">
+
+<head>
+    <title>Branch-List</title>
+</head>
+
+<body>
+    <div class="col-md-12" layout:fragment="content">
+        <h1>Upload Sales Data CSV</h1>
+        <form action="/salesforce/sales/upload-data" method="post" enctype="multipart/form-data">
+            <label for="file">Choose CSV file:</label>
+            <input type="file" id="file" name="file" accept=".csv" required>
+            <button class="btn btn-danger" type="submit">Upload</button>
+        </form>
+    </div>
+    <th:block layout:fragment="custom_footer_script" th:remove="tag">
+
+    </th:block>
+</body>
+
+</html>

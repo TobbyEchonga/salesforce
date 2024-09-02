@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" th:with="page='Dashboard'" layout:decorate="~{layouts/main}">
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="col-md-12" layout:fragment="content">
+        <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+            <form action="/salesforce/sales/dashboard" method="get">
+                <div class="form-group">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" name="startDate" id="from" />
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="to" name="endDate" />
+                </div>
+                <button type="submit" class="btn btn-primary">Generate Report</button>
+            </form>
+            <p>
+            <h2 th:text="${range}"></h2>
+            </p>
+            <p th:text="${totalProfit}"></p>
+
+            <h2>Top 5 Most Profitable Item Types</h2>
+            <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+                <div class="card-box mb-30">
+                    <div class="pb-20">
+                        <table id="transactionTbl" class="table display">
+                            <thead>
+                                <tr>
+                                    <th>Item Type</th>
+                                    <th>Total Profit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="itemType : ${top5ItemTypes}">
+                                    <td th:text="${itemType.key}"></td>
+                                    <td th:text="${itemType.value}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block layout:fragment="custom_footer_script" th:remove="tag">
+        <script>
+            $(document).ready(function () {
+                $('#transactionTbl').DataTable({
+                    dom: 'Bfrtip',
+                    fixedHeader: true,
+                    "pageLength": 10,
+                    "order": [1, "desc"],
+                    buttons: {
+                        name: 'primary',
+                        buttons: ['excel', 'pdf']
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Set the earliest date from server
+                const earliestDateStr = /*[[${earliestRecordDate}]]*/ '1970-01-01'; // Replace this with Thymeleaf expression
+                const earliestDate = new Date(earliestDateStr);
+
+                const startDateInput = document.getElementById('startDate');
+                const endDateInput = document.getElementById('endDate');
+
+                function validateDates() {
+                    const startDate = new Date(startDateInput.value);
+                    const endDate = new Date(endDateInput.value);
+
+                    if (startDate < earliestDate) {
+                        alert("Start date cannot be earlier than the earliest record date.");
+                        return false;
+                    }
+
+                    if (endDate <= startDate) {
+                        alert("End date must be after the start date.");
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                document.getElementById('dashboardForm').addEventListener('submit', function (event) {
+                    if (!validateDates()) {
+                        event.preventDefault();
+                    }
+                });
+            });
+        </script>
+    </th:block>
+</body>
+
+</html>

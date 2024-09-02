@@ -1,0 +1,96 @@
+
+    body {
+      background-color: #ffffff;
+    }
+
+    #ExecButton {
+      margin-top: 800px;
+      margin-left: 48%;
+    }
+
+    #semiTransparenDiv {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      /*Centering my shade */
+      margin-bottom: 40px;
+      margin-top: 0px;
+
+      background-color: rgba(255, 255, 255, 0.7);
+      z-index: 9999;
+      display: none;
+    }
+
+    @-webkit-keyframes spin {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #semiTransparenDiv::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 48%;
+      top: 40%;
+      width: 80px;
+      height: 80px;
+      border-style: solid;
+      border: 5px solid black;
+      border-top-color: #78cad0;
+      border-width: 7px;
+      border-radius: 50%;
+      -webkit-animation: spin .8s linear infinite;
+
+      /* Lets make it go round */
+      animation: spin .8s linear infinite;
+    }
+    .badge_cover {
+      position: absolute;
+      right: 0;
+      top: 0;
+      border-top: 70px solid #cc0000;
+      border-left: 75px solid transparent;
+    }
+
+    .mask-t {
+      color: #ffffff;
+      position: absolute;
+      width: 80px;
+      height: 100px;
+      right: 0px;
+      top: 0px;
+    }
+
+    .mask-t strong {
+      display: block;
+      width: 100%;
+      height: 100%;
+      line-height: 100px;
+      text-align: center;
+      -webkit-transform: rotate(45deg) translate(0, -25%);
+      -moz-transform: rotate(45deg) translate(0, -25%);
+      -ms-transform: rotate(45deg) translate(0, -25%);
+      -o-transform: rotate(45deg) translate(0, -25%);
+      transform: rotate(45deg) translate(0, -25%);
+    }
+

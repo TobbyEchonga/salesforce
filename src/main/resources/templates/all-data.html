@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" th:with="page='View Data'" layout:decorate="~{layouts/main}">
+
+<head>
+    <title>View Data</title>
+</head>
+
+<body>
+    <div class="col-md-12" layout:fragment="content">
+        <h1>Processed Sales Data</h1>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>Item Type</th>
+                    <th>Sales Channel</th>
+                    <th>Order Priority</th>
+                    <th>Order Date</th>
+                    <th>Order ID</th>
+                    <th>Ship Date</th>
+                    <th>Units Sold</th>
+                    <th>Unit Price</th>
+                    <th>Unit Cost</th>
+                    <th>Total Revenue</th>
+                    <th>Total Cost</th>
+                    <th>Total Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="data : ${allData}">
+                    <td th:text="${data.region}"></td>
+                    <td th:text="${data.country}"></td>
+                    <td th:text="${data.itemType}"></td>
+                    <td th:text="${data.salesChannel}"></td>
+                    <td th:text="${data.orderPriority}"></td>
+                    <td th:text="${data.orderDate}"></td>
+                    <td th:text="${data.orderId}"></td>
+                    <td th:text="${data.shipDate}"></td>
+                    <td th:text="${data.unitsSold}"></td>
+                    <td th:text="${data.unitPrice}"></td>
+                    <td th:text="${data.unitCost}"></td>
+                    <td th:text="${data.totalRevenue}"></td>
+                    <td th:text="${data.totalCost}"></td>
+                    <td th:text="${data.totalProfit}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Generate Report</h2>
+        <form action="/sales/process-dates" method="post">
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required />
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </form>
+        <br>
+        <a href="/sales/dashboard">View Calculations</a>
+    </div>
+</body>
+
+</html>
