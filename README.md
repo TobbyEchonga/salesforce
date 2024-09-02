@@ -3,4 +3,8 @@ This is s simple application that is able to read CSV file and process it whereb
 
 
 ## Image below represents the application
-![alt text](https://github.com/TobbyEchonga/weather_python_api/blob/main/weather_test_api.JPG?raw=true)
+# Upload Page
+![alt text](https://github.com/TobbyEchonga/salesforce/blob/main/home-upload%20page.png)
+
+# Process page
+![alt text](https://github.com/TobbyEchonga/salesforce/blob/main/process%20page.png)
